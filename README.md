@@ -3,15 +3,29 @@ Python script to swap between led boards (NHL/MLB) and possibly others if develo
 
 This is pretty basic.  You need the following:
 - Python3
-- gpiozero
 - supervisor properly setup to run ALL the boards you want run
 - some led boards (NHL https://github.com/riffnshred/nhl-led-scoreboard and MLB https://github.com/MLB-LED-Scoreboard/mlb-led-scoreboard)
 
 All you should need to do is go into the python script, make sure things are set for the names of your supervisor processesfor your led-boards.  
 
-Specifically, the available settings are:
-**boardnames** - list of the names of your supervisor processes
-**timetohold** - number of seconds to hold the button until the Pi shuts down.
-**buttonnumber** - pin number your using for your button (using 3 will let you restart the Pi via a button press)
+**board_names** - list of the names of your supervisor processes (defaults to the sample config names below)
 
-One issue - when you do the 'shutdown' hold, it will start executing the board flip routine first.  Happy to incorporate a better way to do that, but my skills are...minimal.
+### Usage
+
+Please refer to the [NHL LED Scoreboard Supervisor setup](https://github.com/riffnshred/nhl-led-scoreboard#method-1-using-supervisor) for specific instructions on setting up Supervisor
+
+It's worth noting you will likely need two program configs:
+
+```
+[program:MLB]
+command=[SCOREBOARD COMMAND]
+directory=[LOCATION OF THE MLB SCOREBOARD DIRECTORY]
+autostart=true
+autorestart=true
+
+[program:NHL]
+command=[SCOREBOARD COMMAND]
+directory=[LOCATION OF THE NHL SCOREBOARD DIRECTORY]
+autostart=false
+autorestart=true
+```
