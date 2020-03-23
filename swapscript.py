@@ -21,4 +21,11 @@ def run(board_state):
 	os.system(execcommand)  # runs the board
 	board_state += 1
 	
-	run(board_state)
+
+if __name__ == "__main__":
+	while True:
+		try:
+			run(0)
+		except KeyboardInterrupt:
+			print("Exiting\n")
+			sys.exit(0)
